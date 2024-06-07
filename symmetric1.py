@@ -2,7 +2,7 @@ from cryptography.fernet import Fernet
 
 key = Fernet.generate_key()
 cipher = Fernet(key)
-msg = b"Hello SUnny wolrd"
+msg = b"Hello Sunny wolrd"
 
 
 
