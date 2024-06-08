@@ -31,10 +31,10 @@ signature = sender_private_key.sign(
 )
 
 # sender generates a symmetric key to encrypt the key before sending
-symmetric_key = AESGCM.generate_key(bit_length=256)  # Generate a random 256-bit symmetric key, 
+symmetric_key = AESGCM.generate_key(bit_length=256)  # Generate a random 256-bit symmetric key, AES is computational efficent(its quick)
 
 # Message is encrypted with AES-GCM
-aesgcm = AESGCM(symmetric_key)
+aesgcm = AESGCM(symmetric_key) #widely used becasue of it efficency and it commnon use
 nonce = os.urandom(12)
 aad = b"this is used to authenticate"
 ciphertext = aesgcm.encrypt(nonce, message, aad)
@@ -51,6 +51,7 @@ encrypted_symmetric_key = rec_public_key.encrypt(
 )
 
 # reciever decrypts the symmetric key with their private key
+# symmetric is efficent and dosen't use much power
 decrypted_symmetric_key = rec_private_key.decrypt(
     encrypted_symmetric_key,
     padding.OAEP(
@@ -83,4 +84,5 @@ if symmetric_key == decrypted_symmetric_key:
     print("Key:", decrypted_symmetric_key) # both users can now use this key for secure communication
 else:
     print("Key exchange failed.")
+
 
